@@ -31,6 +31,8 @@ Amrit Singh ([CODEHEIM](https://www.codeheim.io/)) offers an example of a Go ima
 
 ### Run the program
 
+The original program converts image files to 500 pixel by 500 pixel grayscale copies.
+
 From the terminal, run:
 * Create the executable: run `go build`
 * Run `./goroutines_pipeline.exe`
@@ -38,6 +40,16 @@ From the terminal, run:
 The input images were located in the /images folder:
 
 ![input image 1](/images/image1.jpeg)
+![input image 2](/images/image2.jpeg)
+![input image 3](/images/image3.jpeg)
+![input image 4](/images/image4.jpeg)
+
+The output images were saved in the /images/output folder:
+
+![output image 1](/images/output/image1.jpeg)
+![output image 2](/images/output/image2.jpeg)
+![output image 3](/images/output/image3.jpeg)
+![output image 4](/images/output/image4.jpeg)
 
 ## Add error checking for image file input and output.
 
