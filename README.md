@@ -21,9 +21,9 @@ Amrit Singh ([CODEHEIM](https://www.codeheim.io/)) offers an example of a Go ima
 
 (Optional) Note that resizing images can cause distortion. How can we preserve the aspect ratio of images? Suppose we detect the size of the input images in pixels and ensure that the output image has the same shape, rather than the 500x500 shape in the image_processing.Resize helper function.
 
-## Clone the GitHub repository for image processing. 
+## Clone the GitHub repository for image processing.  Build and run the program in its original form.
 
-## Build and run the program in its original form.
+Visit [the original project's Github repository](https://github.com/code-heim/go_21_goroutines_pipeline) and fork the repository to create a new repository.
 
 ## Add error checking for image file input and output.
 
