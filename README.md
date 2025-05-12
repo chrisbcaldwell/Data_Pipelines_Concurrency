@@ -23,7 +23,21 @@ Amrit Singh ([CODEHEIM](https://www.codeheim.io/)) offers an example of a Go ima
 
 ## Clone the GitHub repository for image processing.  Build and run the program in its original form.
 
-Visit [the original project's Github repository](https://github.com/code-heim/go_21_goroutines_pipeline) and fork the repository to create a new repository.
+### Clone the repository
+
+* Create a new empty Github repository, and a new local folder.
+* Visit [the original project's Github repository](https://github.com/code-heim/go_21_goroutines_pipeline) and fork the repository into the new respository that was just created.
+* In the terminal, navigate to the new local project folder, then run `git clone (your repository URL).git`
+
+### Run the program
+
+From the terminal, run:
+* Create the executable: run `go build`
+* Run `./goroutines_pipeline.exe`
+
+The input images were located in the /images folder:
+
+![input image 1](/images/image1.jpeg)
 
 ## Add error checking for image file input and output.
 
