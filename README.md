@@ -124,3 +124,9 @@ Four public domain images of Pacific Northwest interest were added:
 https://www.reddit.com/r/golang/comments/wwsclz/trying_to_understand_context_better_specifically/
 
 ch 12 learning go 2nd ed
+
+Wikimedia commons
+
+each photo
+
+
