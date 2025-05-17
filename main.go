@@ -94,10 +94,10 @@ func saveImage(ctx context.Context, input <-chan Job) <-chan bool {
 func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	imagePaths := []string{"images/image1.jpeg",
-		"images/image2.jpeg",
-		"images/image3.jpeg",
-		"images/image4.jpeg",
+	imagePaths := []string{"images/ballard_locks.jpg",
+		"images/Mount_Rainier_over_Tacoma.jpg",
+		"images/sockeye.jpg",
+		"images/st_helens_1982.jpg",
 	}
 
 	channel1 := loadImage(ctx, imagePaths)

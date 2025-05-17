@@ -57,8 +57,19 @@ func Grayscale(img image.Image) image.Image {
 }
 
 func Resize(img image.Image) image.Image {
-	newWidth := uint(500)
-	newHeight := uint(500)
+	maxSize := uint(500)
+	b := img.Bounds()
+	width := b.Dx()
+	height := b.Dy()
+	newWidth := uint(maxSize)
+	newHeight := uint(maxSize)
+	// resize.Resize will scale the image if the smaller dimension is passed as 0
+	if width < height {
+		newWidth = 0
+	}
+	if height < width {
+		newHeight = 0
+	}
 	resizedImg := resize.Resize(newWidth, newHeight, img, resize.Lanczos3)
 	return resizedImg
 }
