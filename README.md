@@ -109,6 +109,37 @@ Four public domain images of Pacific Northwest interest were added:
 ![my image 3, sockeye salmon in spawning colors](/images/sockeye.jpg)
 ![my image 4, Mount Saint Helens with steam plume, 1982](/images/st_helens_1982.jpg)
 
+These images were selected in part because they have different width and height dimensions to test the adjustment to retain aspect ratio.  That adjustment was made to the `imageprocessing.Resize` function as follows:
+
+```
+func Resize(img image.Image) image.Image {
+	maxSize := uint(500)
+	b := img.Bounds()
+	width := b.Dx()
+	height := b.Dy()
+	newWidth := uint(maxSize)
+	newHeight := uint(maxSize)
+	// resize.Resize will scale the image if the smaller dimension is passed as 0
+	if width < height {
+		newWidth = 0
+	}
+	if height < width {
+		newHeight = 0
+	}
+	resizedImg := resize.Resize(newWidth, newHeight, img, resize.Lanczos3)
+	return resizedImg
+}
+```
+
+The imported function resize.Resize allows automatic scaling to the original aspect ratio if either the height or width is passed as 0.
+
+Resuling images:
+
+![output image 1, Ballard Locks](/images/output/ballard_locks.jpg)
+![output image 2, Tahoma over Tacoma](/images/output/Mount_Rainier_over_Tacoma.jpg)
+![output image 3, sockeye salmon in spawning colors](/images/output/sockeye.jpg)
+![output image 4, Mount Saint Helens with steam plume, 1982](/images/output/st_helens_1982.jpg)
+
 ## Add unit tests to the code repository.
 
 ## Add benchmark methods for capturing pipeline throughput times. Design the program so it can be run with and without goroutines. 
