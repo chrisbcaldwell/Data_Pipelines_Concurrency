@@ -102,6 +102,13 @@ The remaing `main.go` functions `resize`, `covertToGrayscale`, and `saveImage` w
 
 ## Replace the four input image files with files of your choosing.
 
+Four public domain images of Pacific Northwest interest were added:
+
+![output image 1](/images/output/ballard_locks.jpg)
+![output image 2](/images/output/Mount_Rainier_over_Tacoma.jpg)
+![output image 3](/images/output/sockeye.jpg)
+![output image 4](/images/output/st_helens_1982.jpg)
+
 ## Add unit tests to the code repository.
 
 ## Add benchmark methods for capturing pipeline throughput times. Design the program so it can be run with and without goroutines. 
