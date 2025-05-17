@@ -5,6 +5,7 @@ import (
 	imageprocessing "goroutines_pipeline/image_processing"
 	"image"
 	"strings"
+	"context"
 )
 
 type Job struct {
@@ -13,18 +14,23 @@ type Job struct {
 	OutPath   string
 }
 
-func loadImage(paths []string) <-chan Job {
+func loadImage(ctx context.Context, paths []string) <-chan Job {
 	out := make(chan Job)
 	go func() {
 		// For each input path create a job and add it to
 		// the out channel
+		defer close(out)
 		for _, p := range paths {
-			job := Job{InputPath: p,
-				OutPath: strings.Replace(p, "images/", "images/output/", 1)}
-			job.Image = imageprocessing.ReadImage(p)
-			out <- job
+			select {
+			case <-ctx.Done():
+                return
+			default:
+				job := Job{InputPath: p,
+					OutPath: strings.Replace(p, "images/", "images/output/", 1)}
+				job.Image = imageprocessing.ReadImage(p)
+				out <- job
+			}
 		}
-		close(out)
 	}()
 	return out
 }
@@ -68,14 +74,15 @@ func saveImage(input <-chan Job) <-chan bool {
 }
 
 func main() {
-
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 	imagePaths := []string{"images/image1.jpeg",
 		"images/image2.jpeg",
 		"images/image3.jpeg",
 		"images/image4.jpeg",
 	}
 
-	channel1 := loadImage(imagePaths)
+	channel1 := loadImage(ctx, imagePaths)
 	channel2 := resize(channel1)
 	channel3 := convertToGrayscale(channel2)
 	writeResults := saveImage(channel3)
