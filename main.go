@@ -1,11 +1,11 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	imageprocessing "goroutines_pipeline/image_processing"
 	"image"
 	"strings"
-	"context"
 )
 
 type Job struct {
@@ -23,7 +23,7 @@ func loadImage(ctx context.Context, paths []string) <-chan Job {
 		for _, p := range paths {
 			select {
 			case <-ctx.Done():
-                return
+				return
 			default:
 				job := Job{InputPath: p,
 					OutPath: strings.Replace(p, "images/", "images/output/", 1)}
@@ -35,40 +35,58 @@ func loadImage(ctx context.Context, paths []string) <-chan Job {
 	return out
 }
 
-func resize(input <-chan Job) <-chan Job {
+func resize(ctx context.Context, input <-chan Job) <-chan Job {
 	out := make(chan Job)
 	go func() {
 		// For each input job, create a new job after resize and add it to
 		// the out channel
+		defer close(out)
 		for job := range input { // Read from the channel
-			job.Image = imageprocessing.Resize(job.Image)
-			out <- job
+			select {
+			case <-ctx.Done():
+				return
+			default:
+				job.Image = imageprocessing.Resize(job.Image)
+				out <- job
+			}
 		}
-		close(out)
+
 	}()
 	return out
 }
 
-func convertToGrayscale(input <-chan Job) <-chan Job {
+func convertToGrayscale(ctx context.Context, input <-chan Job) <-chan Job {
 	out := make(chan Job)
 	go func() {
+		defer close(out)
 		for job := range input { // Read from the channel
-			job.Image = imageprocessing.Grayscale(job.Image)
-			out <- job
+			select {
+			case <-ctx.Done():
+				return
+			default:
+				job.Image = imageprocessing.Grayscale(job.Image)
+				out <- job
+			}
 		}
-		close(out)
+
 	}()
 	return out
 }
 
-func saveImage(input <-chan Job) <-chan bool {
+func saveImage(ctx context.Context, input <-chan Job) <-chan bool {
 	out := make(chan bool)
 	go func() {
+		defer close(out)
 		for job := range input { // Read from the channel
-			imageprocessing.WriteImage(job.OutPath, job.Image)
-			out <- true
+			select {
+			case <-ctx.Done():
+				return
+			default:
+				imageprocessing.WriteImage(job.OutPath, job.Image)
+				out <- true
+			}
 		}
-		close(out)
+
 	}()
 	return out
 }
@@ -83,9 +101,9 @@ func main() {
 	}
 
 	channel1 := loadImage(ctx, imagePaths)
-	channel2 := resize(channel1)
-	channel3 := convertToGrayscale(channel2)
-	writeResults := saveImage(channel3)
+	channel2 := resize(ctx, channel1)
+	channel3 := convertToGrayscale(ctx, channel2)
+	writeResults := saveImage(ctx, channel3)
 
 	for success := range writeResults {
 		if success {
