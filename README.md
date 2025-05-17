@@ -85,7 +85,7 @@ func loadImage(ctx context.Context, paths []string) <-chan Job {
 		for _, p := range paths {
 			select {
 			case <-ctx.Done():
-                return
+                		return
 			default:
 				job := Job{InputPath: p,
 					OutPath: strings.Replace(p, "images/", "images/output/", 1)}
@@ -102,6 +102,13 @@ The remaing `main.go` functions `resize`, `covertToGrayscale`, and `saveImage` w
 
 ## Replace the four input image files with files of your choosing.
 
+Four public domain images of Pacific Northwest interest were added:
+
+![my image 1, Ballard Locks](/images/ballard_locks.jpg)
+![my image 2, Tahoma over Tacoma](/images/Mount_Rainier_over_Tacoma.jpg)
+![my image 3, sockeye salmon in spawning colors](/images/sockeye.jpg)
+![my image 4, Mount Saint Helens with steam plume, 1982](/images/st_helens_1982.jpg)
+
 ## Add unit tests to the code repository.
 
 ## Add benchmark methods for capturing pipeline throughput times. Design the program so it can be run with and without goroutines. 
@@ -117,3 +124,13 @@ The remaing `main.go` functions `resize`, `covertToGrayscale`, and `saveImage` w
 https://www.reddit.com/r/golang/comments/wwsclz/trying_to_understand_context_better_specifically/
 
 ch 12 learning go 2nd ed
+
+Wikimedia commons
+
+each photo
+
+https://stackoverflow.com/questions/21741431/get-image-size-with-golang
+
+https://github.com/nfnt/resize
+
+https://gist.github.com/sergiotapia/7882944 user https://gist.github.com/aprln reply
