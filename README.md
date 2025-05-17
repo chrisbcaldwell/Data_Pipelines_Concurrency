@@ -142,6 +142,8 @@ Resuling images:
 
 ## Add unit tests to the code repository.
 
+_Deferred to a later time_
+
 ## Add benchmark methods for capturing pipeline throughput times. Design the program so it can be run with and without goroutines. 
 
 ## Make additional code modifications as you see fit.
