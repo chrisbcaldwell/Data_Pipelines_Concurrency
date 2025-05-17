@@ -148,11 +148,15 @@ _Deferred to a later time_
 
 ## Make additional code modifications as you see fit.
 
+See above, where original image aspect ratio scaling was implemented.
+
 ## Build, test, and run the pipeline program with and without goroutines. Compare processing times with and without goroutines.
 
 ## Prepare a complete README.md file documenting your work.
 
 ## References
+
+Just notes until I finish and add some polish
 
 https://www.reddit.com/r/golang/comments/wwsclz/trying_to_understand_context_better_specifically/
 
