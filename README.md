@@ -85,7 +85,7 @@ func loadImage(ctx context.Context, paths []string) <-chan Job {
 		for _, p := range paths {
 			select {
 			case <-ctx.Done():
-                return
+                		return
 			default:
 				job := Job{InputPath: p,
 					OutPath: strings.Replace(p, "images/", "images/output/", 1)}
@@ -129,4 +129,8 @@ Wikimedia commons
 
 each photo
 
+https://stackoverflow.com/questions/21741431/get-image-size-with-golang
 
+https://github.com/nfnt/resize
+
+https://gist.github.com/sergiotapia/7882944 user https://gist.github.com/aprln reply
