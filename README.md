@@ -53,6 +53,53 @@ The output images were saved in the /images/output folder:
 
 ## Add error checking for image file input and output.
 
+One opportunity to avoid problems in the original code is handling goroutines that terminate early.  Each function in `main.go` calls a for loop that initiates a goroutine.  As an example, the original version of `loadImage` was:
+
+```
+func loadImage(paths []string) <-chan Job {
+	out := make(chan Job)
+	go func() {
+		// For each input path create a job and add it to
+		// the out channel
+		for _, p := range paths {
+			job := Job{InputPath: p,
+				OutPath: strings.Replace(p, "images/", "images/output/", 1)}
+			job.Image = imageprocessing.ReadImage(p)
+			out <- job
+		}
+		close(out)
+	}()
+	return out
+}
+```
+
+After importing the `context` library the function was changed to detect and close terminated channels:
+
+```
+func loadImage(ctx context.Context, paths []string) <-chan Job {
+	out := make(chan Job)
+	go func() {
+		// For each input path create a job and add it to
+		// the out channel
+		defer close(out)
+		for _, p := range paths {
+			select {
+			case <-ctx.Done():
+                return
+			default:
+				job := Job{InputPath: p,
+					OutPath: strings.Replace(p, "images/", "images/output/", 1)}
+				job.Image = imageprocessing.ReadImage(p)
+				out <- job
+			}
+		}
+	}()
+	return out
+}
+```
+
+The remaing `main.go` functions `resize`, `covertToGrayscale`, and `saveImage` were similarly reconfigured.
+
 ## Replace the four input image files with files of your choosing.
 
 ## Add unit tests to the code repository.
@@ -64,3 +111,9 @@ The output images were saved in the /images/output folder:
 ## Build, test, and run the pipeline program with and without goroutines. Compare processing times with and without goroutines.
 
 ## Prepare a complete README.md file documenting your work.
+
+## References
+
+https://www.reddit.com/r/golang/comments/wwsclz/trying_to_understand_context_better_specifically/
+
+ch 12 learning go 2nd ed
