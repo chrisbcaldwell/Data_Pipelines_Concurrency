@@ -104,10 +104,10 @@ The remaing `main.go` functions `resize`, `covertToGrayscale`, and `saveImage` w
 
 Four public domain images of Pacific Northwest interest were added:
 
-![output image 1](/images/output/ballard_locks.jpg)
-![output image 2](/images/output/Mount_Rainier_over_Tacoma.jpg)
-![output image 3](/images/output/sockeye.jpg)
-![output image 4](/images/output/st_helens_1982.jpg)
+![my image 1, Ballard Locks](/images/ballard_locks.jpg)
+![my image 2, Tahoma over Tacoma](/images/Mount_Rainier_over_Tacoma.jpg)
+![my image 3, sockeye salmon in spawning colors](/images/sockeye.jpg)
+![my image 4, Mount Saint Helens with steam plume, 1982](/images/st_helens_1982.jpg)
 
 ## Add unit tests to the code repository.
 
