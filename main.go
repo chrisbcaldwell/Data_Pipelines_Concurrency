@@ -6,6 +6,7 @@ import (
 	imageprocessing "goroutines_pipeline/image_processing"
 	"image"
 	"strings"
+	"time"
 )
 
 type Job struct {
@@ -91,15 +92,31 @@ func saveImage(ctx context.Context, input <-chan Job) <-chan bool {
 	return out
 }
 
+func processLinearly(path string) {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Failed!")
+		}
+	}()
+	outPath := strings.Replace(path, "images/", "images/output/", 1)
+	img := imageprocessing.ReadImage(path)
+	img = imageprocessing.Resize(img)
+	img = imageprocessing.Grayscale(img)
+	imageprocessing.WriteImage(outPath, img)
+	fmt.Println("Success!")
+}
+
 func main() {
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
 	imagePaths := []string{"images/ballard_locks.jpg",
 		"images/Mount_Rainier_over_Tacoma.jpg",
 		"images/sockeye.jpg",
 		"images/st_helens_1982.jpg",
 	}
 
+	// with goroutines:
+	start := time.Now()
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 	channel1 := loadImage(ctx, imagePaths)
 	channel2 := resize(ctx, channel1)
 	channel3 := convertToGrayscale(ctx, channel2)
@@ -112,4 +129,13 @@ func main() {
 			fmt.Println("Failed!")
 		}
 	}
+	fmt.Println("Run Time With Goroutines:", time.Since(start))
+
+	// Without goroutines
+	start = time.Now()
+	for _, path := range imagePaths {
+		processLinearly(path)
+	}
+	fmt.Println("Run Time Without Goroutines:", time.Since(start))
+
 }
