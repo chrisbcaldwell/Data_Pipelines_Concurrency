@@ -144,7 +144,38 @@ Resuling images:
 
 _Deferred to a later time_
 
-## Add benchmark methods for capturing pipeline throughput times. Design the program so it can be run with and without goroutines. 
+## Add benchmark methods for capturing pipeline throughput times. Design the program so it can be run with and without goroutines.
+
+Execution time was captured with a simple `start := time.Now()` / `time.Since(start)` technique.
+
+For the program without goroutines, a function was built to apply the functions in `imageprocessing` in the correct order and to handle panics:
+
+```
+func processLinearly(path string) {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Failed!")
+		}
+	}()
+	outPath := strings.Replace(path, "images/", "images/output/", 1)
+	img := imageprocessing.ReadImage(path)
+	img = imageprocessing.Resize(img)
+	img = imageprocessing.Grayscale(img)
+	imageprocessing.WriteImage(outPath, img)
+	fmt.Println("Success!")
+}
+```
+
+`processLinearly` was called at the end of `main.go` to process the images without use of goroutines:
+
+```
+// Without goroutines
+start = time.Now()
+for _, path := range imagePaths {
+	processLinearly(path)
+}
+fmt.Println("Run Time Without Goroutines:", time.Since(start))
+```
 
 ## Make additional code modifications as you see fit.
 
@@ -152,22 +183,50 @@ See above, where original image aspect ratio scaling was implemented.
 
 ## Build, test, and run the pipeline program with and without goroutines. Compare processing times with and without goroutines.
 
+Execution through the terminal ran as follows:
+
+```
+PS C:\...\Data_Pipelines_Concurrency> .\goroutines_pipeline
+Success!
+Success!
+Success!
+Success!
+Run Time With Goroutines: 124.0168ms
+Success!
+Success!
+Success!
+Success!
+Run Time Without Goroutines: 169.1572ms
+```
+
+The pipeline is considerably faster with goroutines.  All images processed as expected.
+
 ## Prepare a complete README.md file documenting your work.
+
+I hope you're enjoying it!
 
 ## References
 
 Just notes until I finish and add some polish
 
-https://www.reddit.com/r/golang/comments/wwsclz/trying_to_understand_context_better_specifically/
+InfectiouSoul.  "Trying to understand context better, specifically how ctx.Done() works."  Reddit, August 24, 2022, https://www.reddit.com/r/golang/comments/wwsclz/trying_to_understand_context_better_specifically/.
 
-ch 12 learning go 2nd ed
+Bodner, Jon.  _Learning Go, 2nd Edition._  O'Reilly Media Inc., 2024.
 
-Wikimedia commons
+Topinka, Lyn.  _St. Helens Plume from Harry's Ridge_, May 19, 1982, photograph, https://vulcan.wr.usgs.gov/Volcanoes/MSH/Images/MSH80/framework.html via https://commons.wikimedia.org/wiki/File:MSH82_st_helens_plume_from_harrys_ridge_05-19-82.jpg.
 
-each photo
+US Army Corps of Engineers, _Lake Washington Ship Canal, Hiram M. Chittenden Locks, 1995_, c. 1995, photograph, http://images.usace.army.mil/scripts/PortWeb.dll?query&field=Image%20name&opt=matches&value=1091-51.Jpg&template=Selected_Info&catalog=photoDVL via https://commons.wikimedia.org/wiki/File:Lake_Washington_ship_canal,_Hiram_M._Chittenden_Locks,_1995.jpg.
 
-https://stackoverflow.com/questions/21741431/get-image-size-with-golang
+Topinka, Lyn.  _Mount Rainier over Tacoma_, August 20, 1984, photograph, http://web.archive.org/web/20051103010250/http://vulcan.wr.usgs.gov/Imgs/Jpg/Rainier/Images/Rainier84_mount_rainier_and_tacoma_08-20-84.jpg via https://commons.wikimedia.org/wiki/File:Mount_Rainier_over_Tacoma.jpg.
 
-https://github.com/nfnt/resize
+Menke, David.  _Red salmon or Sockeye salmon specimens_, digitized April 8, 2008, photograph, https://digitalmedia.fws.gov/digital/collection/natdiglib/id/2564.
+
+edap.  "Get image size with golang."  stackoverflow, February 12, 2014, https://stackoverflow.com/questions/21741431/get-image-size-with-golang.
+
+Singh, Amrit.  go_21_goroutines_pipeline, February 7, 2024, https://github.com/code-heim/go_21_goroutines_pipeline.
+
+Schlich, Jan.  resize, February 21, 2018, https://github.com/nfnt/resize.
 
 https://gist.github.com/sergiotapia/7882944 user https://gist.github.com/aprln reply
+
+https://stackoverflow.com/questions/51113193/recover-and-continue-for-loop-if-panic-occur-golang
