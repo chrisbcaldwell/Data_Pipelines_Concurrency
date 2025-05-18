@@ -207,26 +207,24 @@ I hope you're enjoying it!
 
 ## References
 
-Just notes until I finish and add some polish
+aprln.  Reply to Sergio Tapia, "Golang - Getting the dimensions of an image. jpg, jpeg, png."  GitHub Gist, December 9, 2013, https://gist.github.com/sergiotapia/7882944.
+
+Bodner, Jon.  _Learning Go, 2nd Edition._  O'Reilly Media Inc., 2024.
+
+edap.  "Get image size with golang."  stackoverflow, February 12, 2014, https://stackoverflow.com/questions/21741431/get-image-size-with-golang.
 
 InfectiouSoul.  "Trying to understand context better, specifically how ctx.Done() works."  Reddit, August 24, 2022, https://www.reddit.com/r/golang/comments/wwsclz/trying_to_understand_context_better_specifically/.
 
-Bodner, Jon.  _Learning Go, 2nd Edition._  O'Reilly Media Inc., 2024.
+Menke, David.  _Red salmon or Sockeye salmon specimens_, digitized April 8, 2008, photograph, https://digitalmedia.fws.gov/digital/collection/natdiglib/id/2564.
+
+Naseem, Ahsan.  "Recover and continue for loop if panic occur Golang."  stackoverflow, June 30, 2018, https://stackoverflow.com/questions/51113193/recover-and-continue-for-loop-if-panic-occur-golang.
+
+Schlich, Jan.  resize, February 21, 2018, GitHub repository, https://github.com/nfnt/resize.
+
+Singh, Amrit.  go_21_goroutines_pipeline, GitHub repository, February 7, 2024, https://github.com/code-heim/go_21_goroutines_pipeline.
+
+Topinka, Lyn.  _Mount Rainier over Tacoma_, August 20, 1984, photograph, http://web.archive.org/web/20051103010250/http://vulcan.wr.usgs.gov/Imgs/Jpg/Rainier/Images/Rainier84_mount_rainier_and_tacoma_08-20-84.jpg via https://commons.wikimedia.org/wiki/File:Mount_Rainier_over_Tacoma.jpg.
 
 Topinka, Lyn.  _St. Helens Plume from Harry's Ridge_, May 19, 1982, photograph, https://vulcan.wr.usgs.gov/Volcanoes/MSH/Images/MSH80/framework.html via https://commons.wikimedia.org/wiki/File:MSH82_st_helens_plume_from_harrys_ridge_05-19-82.jpg.
 
 US Army Corps of Engineers, _Lake Washington Ship Canal, Hiram M. Chittenden Locks, 1995_, c. 1995, photograph, http://images.usace.army.mil/scripts/PortWeb.dll?query&field=Image%20name&opt=matches&value=1091-51.Jpg&template=Selected_Info&catalog=photoDVL via https://commons.wikimedia.org/wiki/File:Lake_Washington_ship_canal,_Hiram_M._Chittenden_Locks,_1995.jpg.
-
-Topinka, Lyn.  _Mount Rainier over Tacoma_, August 20, 1984, photograph, http://web.archive.org/web/20051103010250/http://vulcan.wr.usgs.gov/Imgs/Jpg/Rainier/Images/Rainier84_mount_rainier_and_tacoma_08-20-84.jpg via https://commons.wikimedia.org/wiki/File:Mount_Rainier_over_Tacoma.jpg.
-
-Menke, David.  _Red salmon or Sockeye salmon specimens_, digitized April 8, 2008, photograph, https://digitalmedia.fws.gov/digital/collection/natdiglib/id/2564.
-
-edap.  "Get image size with golang."  stackoverflow, February 12, 2014, https://stackoverflow.com/questions/21741431/get-image-size-with-golang.
-
-Singh, Amrit.  go_21_goroutines_pipeline, February 7, 2024, https://github.com/code-heim/go_21_goroutines_pipeline.
-
-Schlich, Jan.  resize, February 21, 2018, https://github.com/nfnt/resize.
-
-https://gist.github.com/sergiotapia/7882944 user https://gist.github.com/aprln reply
-
-https://stackoverflow.com/questions/51113193/recover-and-continue-for-loop-if-panic-occur-golang
